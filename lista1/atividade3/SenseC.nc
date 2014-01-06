@@ -69,8 +69,30 @@ implementation
 
   event void Read.readDone(error_t result, uint16_t data) 
   {
+    dbg("SenseC", "Resultado: %u.\n", data);
     if (result == SUCCESS){
-      if (data & 0x0004)
+      if(data>700){
+        call Leds.led2On();
+        call Leds.led1On();
+	call Leds.led0On();
+      }
+      else if(data>500){
+      
+        call Leds.led2Off();
+        call Leds.led1On();
+        call Leds.led0On();
+      }
+      else if(data>300){
+	call Leds.led2Off();
+        call Leds.led1Off();
+        call Leds.led0On();
+      }
+      else{
+	call Leds.led2Off();
+        call Leds.led1Off();
+        call Leds.led0Off();
+      }
+      /*if (data & 0x0004)
         call Leds.led2On();
       else
         call Leds.led2Off();
@@ -81,7 +103,7 @@ implementation
       if (data & 0x0001)
         call Leds.led0On();
       else
-        call Leds.led0Off();
+        call Leds.led0Off();*/
     }
   }
 }
