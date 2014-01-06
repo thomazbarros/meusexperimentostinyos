@@ -107,7 +107,7 @@ implementation {
       }
       btrpkt->nodeid = TOS_NODE_ID;
       btrpkt->counter = counter;
-      if (call AMSend.send(AM_BROADCAST_ADDR, 
+      if (call AMSend.send(1, 
           &pkt, sizeof(BlinkToRadioMsg)) == SUCCESS) {
         busy = TRUE;
       }
